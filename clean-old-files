@@ -10,7 +10,7 @@
 # Warning: this script find and DELETE arbitrary files in the given search
 # path without prompting. Use with caution.
 
-echo "Cleaning old files in $search_path"
+echo "Cleaning old files in /Volumes/Public HD/com-public"
 
 # Find and delete all:
 #   - files older than 30 days ago
