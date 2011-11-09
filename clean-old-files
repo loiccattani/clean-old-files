@@ -7,8 +7,8 @@
 # This script is intended to be used as a maintenance tool to clean
 # temporary files older than 30 days.
 
-# Warning: this script find and DELETE arbitrary files in the given search
-# path without prompting. Use with caution.
+# WARNING: THIS SCRIPT FINDS AND DELETE ARBITRARY FILES IN THE GIVEN SEARCH
+# PATH WITHOUT PROMPTING. USE WITH CAUTION!
 
 search_path="tmp dir"
 
@@ -20,13 +20,13 @@ echo ""
 echo "Cleaning old files in $search_path"
 
 echo "  Removing files with access time older than 30 days ago"
-find $search_path -type f -not -newerat '30 days ago' -print -delete
+find $search_path -type f -not -newerat '30 days ago' -delete
 
 echo "  Removing Directoy Store and Thumbnail Cache"
-find $search_path -name ".DS_Store" -print -delete
-find $search_path -name "Thumbs.db" -print -delete
+find $search_path -name ".DS_Store" -delete
+find $search_path -name "Thumbs.db" -delete
 
 echo "  Removing empty folders"
-find $search_path -type d -empty -print -delete
+find $search_path -type d -empty -delete
 
 IFS=$SAVEIFS
