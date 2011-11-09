@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mkdir -p tmp\ dir/old tmp\ dir/active tmp\ dir/new
+touch tmp\ dir/old/old_file tmp\ dir/active/old_file tmp\ dir/active/accessed_file tmp\ dir/new/new_file
+touch -t "201001011200" tmp\ dir/old/old_file tmp\ dir/active/old_file tmp\ dir/active/accessed_file
+touch -a tmp\ dir/active/accessed_file

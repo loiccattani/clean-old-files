@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This script recursively find and delete each file in the given search
-# path with a modification time older than 30 days. Then recursively find
+# path with a access time older than 30 days. Then recursively find
 # and delete empty directories in the given search path.
 #
 # This script is intended to be used as a maintenance tool to clean
@@ -10,12 +10,23 @@
 # Warning: this script find and DELETE arbitrary files in the given search
 # path without prompting. Use with caution.
 
-echo ""
-echo "Cleaning old files in /Volumes/Public HD/com-public"
+search_path="tmp dir"
 
-# Find and delete all:
-#   - files older than 30 days ago
-#   - empty directories
-#   - .DS_Store files
-#   - Thumbs.db files
-find /Volumes/Public\ HD/com-public \( -type f -not -newermt '30 days ago' -delete \) -or \( -type d -empty -delete \) -or \( -name ".DS_Store" -delete \) -or \( -name "Thumbs.db" -delete \)
+# Swap the input field separator to deal with search path containing spaces
+SAVEIFS=$IFS
+IFS=$'\n'
+
+echo ""
+echo "Cleaning old files in $search_path"
+
+echo "  Removing files with access time older than 30 days ago"
+find $search_path -type f -not -newerat '30 days ago' -print -delete
+
+echo "  Removing Directoy Store and Thumbnail Cache"
+find $search_path -name ".DS_Store" -print -delete
+find $search_path -name "Thumbs.db" -print -delete
+
+echo "  Removing empty folders"
+find $search_path -type d -empty -print -delete
+
+IFS=$SAVEIFS
